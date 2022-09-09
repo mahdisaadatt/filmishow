@@ -1,13 +1,146 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'YekanRegular';
+  src: url('./assets/fonts/yekan-regular/YekanBakh-Regular.eot'); /* IE9 Compat Modes */
+  src: url('./assets/fonts/yekan-regular/YekanBakh-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    /* IE6-IE8 */ url('./assets/fonts/yekan-regular/YekanBakh-Regular.woff2')
+      format('woff2'),
+    /* Modern Browsers */
+      url('./assets/fonts/yekan-regular/YekanBakh-Regular.woff') format('woff'),
+    /* Modern Browsers */
+      url('./assets/fonts/yekan-regular/YekanBakh-Regular.ttf')
+      format('truetype'); /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'YekanBold';
+  src: url('./assets/fonts/yekan-bold/YekanBakh-Bold.eot');
+  src: url('./assets/fonts/yekan-bold/YekanBakh-Bold.eot?#iefix')
+      format('embedded-opentype'),
+    url('./assets/fonts/yekan-bold/YekanBakh-Bold.woff2') format('woff2'),
+    url('./assets/fonts/yekan-bold/YekanBakh-Bold.woff') format('woff'),
+    url('./assets/fonts/yekan-bold/YekanBakh-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'YekanThin';
+  src: url('./assets/fonts/yekan-thin/YekanBakh-Thin.eot');
+  src: url('./assets/fonts/yekan-thin/YekanBakh-Thin.eot?#iefix')
+      format('embedded-opentype'),
+    url('./assets/fonts/yekan-thin/YekanBakh-Thin.woff2') format('woff2'),
+    url('./assets/fonts/yekan-thin/YekanBakh-Thin.woff') format('woff'),
+    url('./assets/fonts/yekan-thin/YekanBakh-Thin.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'FaNum';
+  src: url('./assets/fonts/yekan-regular/dana-fanum-regular.eot');
+  src: url('./assets/fonts/yekan-regular/dana-fanum-regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('./assets/fonts/yekan-regular/dana-fanum-regular.woff') format('woff');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  html,
+  body {
+    direction: rtl;
+  }
+}
+
+@layer components {
+  .burger {
+    display: flex;
+    outline: none;
+    background: transparent;
+    transition: all 250ms ease-out;
+  }
+
+  .burger::before,
+  .burger::after {
+    content: '';
+    width: 20px;
+    height: 2px;
+    border-radius: 4px;
+    position: absolute;
+    background: #fff;
+    transition: all 250ms ease-out;
+    will-change: transform;
+  }
+
+  .burger:before {
+    transform: translateY(-3px);
+  }
+
+  .burger:after {
+    transform: translateY(3px);
+  }
+
+  .active-burger.burger:before {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  .active-burger.burger:after {
+    transform: translateY(0) rotate(-45deg);
+  }
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper .swiper-button-prev {
+    color: #ffd600;
+  }
+  .swiper .swiper-button-next {
+    color: #ffd600;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .swiper-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .section-with-carousel .swiper-slide .carousel-img {
+    display: block;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .section-with-carousel .swiper-slide .carousel-img {
+      height: 400px;
+    }
+  }
+
+  /* @media (min-width: 1200px) {
+    .section-with-carousel .swiper-slide .carousel-img {
+      height: 420px;
+    }
+
+    .section-with-carousel .carousel-controls {
+      padding: 0 50px;
+    }
+  } */
 }
