@@ -1,10 +1,12 @@
 
-## Filmi Show
+# Filmi Show
 A platform for downloading movies, series, etc.
 ------------
-It's not completed yet, and I will push new changes soon.
+Its not completed yet and i will push new changes soon.
 
-# Getting Started with Create React App
+[Live Demo](https://filmishow.vercel.app/)
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
