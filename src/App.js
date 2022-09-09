@@ -15,16 +15,16 @@ import UserPanel from './pages/panels/user/UserPanel';
 import ForgetPass from './pages/auth/ForgetPass';
 
 function App() {
-  // const [loading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 3000);
-  // }, []);
-  // if (loading) {
-  //   return <Loader />;
-  // }
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, []);
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="w-full min-h-screen flex flex-col relative dark:bg-slate-800 text-black dark:text-white bg-slate-50 font-fanum transition">
       <Header />
