@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Loader from './components/common/Loader';
 import Header from './components/layout/Header/Header';
@@ -13,8 +13,10 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import UserPanel from './pages/panels/user/UserPanel';
 import ForgetPass from './pages/auth/ForgetPass';
+import AuthContext from './contexts/authContext';
 
 function App() {
+  const { isLoggedIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -37,10 +39,19 @@ function App() {
             <Route exact path="/series/:id/" element={<SeriesDetails />} />
             <Route exact path="/search/:q/" element={<SearchParams />} />
             <Route exact path="/category/:categories/" element={<Category />} />
-            <Route exact path="/login/" element={<Login />} />
-            <Route exact path="/signup/" element={<Signup />} />
-            <Route exact path="/forget-password/" element={<ForgetPass />} />
-            <Route exact path="/user/:id/" element={<UserPanel />} />
+            {!isLoggedIn ? (
+              <>
+                <Route exact path="/login/" element={<Login />} />
+                <Route exact path="/signup/" element={<Signup />} />
+                <Route
+                  exact
+                  path="/forget-password/"
+                  element={<ForgetPass />}
+                />
+              </>
+            ) : (
+              <Route exact path="/panel/user/" element={<UserPanel />} />
+            )}
           </Routes>
         </div>
       </div>

@@ -1,9 +1,12 @@
 import axios from 'axios';
 
-const endpoint = '';
+const moviesApi = axios.create({
+  baseURL: 'http://localhost:8000',
+});
 
 const getMovies = async () => {
-  return;
+  const { data } = await moviesApi.get('/home/');
+  return data;
 };
 
 const getMovie = async id => {
@@ -22,4 +25,4 @@ const deleteMovie = async id => {
   return;
 };
 
-export { getMovies, getMovie, addMovie, editMovie, deleteMovie }
+export { getMovies, getMovie, addMovie, editMovie, deleteMovie };

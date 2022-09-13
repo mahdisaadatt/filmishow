@@ -1,10 +1,10 @@
-
 # Filmi Show
-A platform for downloading movies, series, etc.
-------------
+
+## A platform for downloading movies, series, etc.
+
 Its not completed yet and i will push new changes soon.
 
-[Live Demo](https://filmishow.vercel.app/)
+<!-- [Live Demo](https://filmishow.vercel.app/) -->
 
 ## Getting Started with Create React App
 

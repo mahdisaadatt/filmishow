@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <div
       role="status"
-      className="w-full h-screen flex justify-center items-center bg-gray-500 dark:bg-slate-700"
+      className="w-full h-screen flex justify-center items-center bg-transparent"
     >
       <svg
         className="inline w-14 h-14 text-gray-900 animate-spin fill-yellow-400"

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useField } from 'formik';
 
-const Default = ({ type, title }) => {
+const Default = ({ ...props }) => {
+  const [field, meta] = useField(props);
   const [input, setInput] = useState('');
   return (
     <div className="form-floating mb-3 sm:w-96">
@@ -8,9 +10,10 @@ const Default = ({ type, title }) => {
         value={input}
         onChange={e => setInput(e.target.value)}
         autoComplete="off"
-        type={type}
-        required={true}
-        className="form-control
+        {...field}
+        {...props}
+        // required={true}
+        className={`form-control
         block
         w-full
         px-3
@@ -24,9 +27,16 @@ const Default = ({ type, title }) => {
         transition
         ease-in-out
         m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 dark:focus:border-blue focus:outline-none"
-        placeholder={title}
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 dark:focus:border-blue focus:outline-none
+        ${
+          meta.error && meta.touched
+            ? 'focus:border-red-700'
+            : 'focus:border-blue-700'
+        }`}
       />
+      {meta.touched && meta.error && (
+        <p className="text-red-500 mt-3 text-sm">{meta.error}</p>
+      )}
     </div>
   );
 };

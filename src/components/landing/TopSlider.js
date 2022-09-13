@@ -18,8 +18,9 @@ const Hero = () => {
               ? `/movie/${movie.id}/`
               : `/series/${movie.id}/`
           }
+          className="relative z-0"
         >
-          <div className="cursor-pointer overflow-hidden group hover:rotate-1 transition text-black dark:text-white">
+          <div className="overflow-hidden relative group hover:rotate-1 transition text-black dark:text-white">
             <img
               src={movie.src}
               alt={movie.name}
@@ -45,7 +46,7 @@ const Hero = () => {
     );
   });
   return (
-    <section className="section-with-carousel w-full relative mt-5">
+    <section className="section-with-carousel w-full mt-5">
       <Swiper
         className="my-8"
         pagination={{

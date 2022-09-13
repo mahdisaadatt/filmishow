@@ -1,9 +1,10 @@
 import React from 'react';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
-const Neural = ({ title, className, icon }) => {
+const Neural = ({ title, className, icon, type }) => {
   return (
     <button
+      type={type}
       className={`${className} flex justify-center items-center hover:opacity-80 transition`}
     >
       {title}
@@ -14,6 +15,7 @@ const Neural = ({ title, className, icon }) => {
 
 Neural.defaultProps = {
   className: '',
+  type: 'button',
 };
 
 export default Neural;
