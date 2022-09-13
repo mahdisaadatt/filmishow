@@ -51,8 +51,22 @@ const logoutUser = async () => {
       },
     }
   );
-
   return data;
 };
 
-export { loginUser, signupUser, logoutUser };
+const newToken = async () => {
+  const token = JSON.parse(getCookie('auth-tokens'));
+  const data = await usersApi.post(
+    '/api/token/refresh/',
+    { refresh: token.refresh },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${token.refresh}`,
+      },
+    }
+  );
+  return data;
+};
+
+export { loginUser, signupUser, logoutUser, newToken };
