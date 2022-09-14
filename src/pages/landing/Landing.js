@@ -8,8 +8,8 @@ const Landing = () => {
   return (
     <>
       <TopSlider />
-      <main className="w-full h-full flex justify-between">
-        <div className="lg:w-2/3 w-full flex flex-col justify-center items-center">
+      <main className="w-full h-full flex justify-between my-8">
+        <div className="lg:w-2/3 w-full flex flex-col items-center">
           <MoviePost />
           <Pagination />
         </div>

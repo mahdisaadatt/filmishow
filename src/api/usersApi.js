@@ -61,8 +61,8 @@ const newToken = async () => {
     { refresh: token.refresh },
     {
       headers: {
-        'Content-Type': 'application/json',
-        // Authorization: `Bearer ${token.refresh}`,
+        'Content-Type': 'application/,json',
+        Authorization: `Bearer ${token.access}`
       },
     }
   );

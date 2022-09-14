@@ -2,19 +2,28 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper';
 import { StarIcon } from '@heroicons/react/24/outline';
-import { arrivalMovies } from '../../data/arrivalMovies';
 import Arrow from '../common/Buttons/Arrow';
+import { arrivalMovies } from '../../data/arrivalMovies';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useArrivalMovies } from '../../hooks';
+import Loader from '../common/Loader';
 
 const Hero = () => {
+  // const { isLoading, isError, error, data } = useArrivalMovies();
+  // if (isLoading) {
+  //   return <Loader />;
+  // }
+  // if (isError) {
+  //   return <p>{error}</p>;
+  // }
   const movies = arrivalMovies.map(movie => {
     return (
       <SwiperSlide key={movie.id} className="px-2">
         <Link
           to={
-            movie.group === 'Movies'
+            movie.group === 'Movie'
               ? `/movie/${movie.id}/`
               : `/series/${movie.id}/`
           }

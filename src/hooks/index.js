@@ -1,4 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useQuery, useMutation, QueryCache } from '@tanstack/react-query';
+import { getAllMovies, getArrivalMovies, getMovie } from '../api/moviesApi';
+
+export const useAllMovies = () => {
+  return useQuery(['movies'], getAllMovies);
+};
+
+export const useMovie = id => {
+  return useQuery(['movie', id], getMovie);
+};
+
+export const useArrivalMovies = () => {
+  return useQuery(['arrival'], getArrivalMovies);
+};
 
 export const useTheme = () => {
   const [isDarkMode, setDarkMode] = useState(true);

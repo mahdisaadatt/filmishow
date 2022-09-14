@@ -4,11 +4,10 @@ import Loader from './components/common/Loader';
 import Header from './components/layout/Header/Header';
 import Footer from './components/layout/Footer';
 import Landing from './pages/landing/Landing';
-import Category from './pages/category/Category';
+import Genre from './pages/category/Genre';
 import PageNotFound from './pages/404/PageNotFound';
 import MovieDetails from './pages/details/MovieDetails';
 import SeriesDetails from './pages/details/SeriesDetails';
-import SearchParams from './pages/search/SearchParams';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import UserPanel from './pages/panels/user/UserPanel';
@@ -35,10 +34,10 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Landing />} />
             <Route exact path="*" element={<PageNotFound />} />
+            <Route exact path="/search/:q/" element={<Landing />} />
             <Route exact path="/movie/:id/" element={<MovieDetails />} />
             <Route exact path="/series/:id/" element={<SeriesDetails />} />
-            <Route exact path="/search/:q/" element={<SearchParams />} />
-            <Route exact path="/category/:categories/" element={<Category />} />
+            <Route exact path="/genre/:name/" element={<Genre />} />
             {!isLoggedIn ? (
               <>
                 <Route exact path="/login/" element={<Login />} />

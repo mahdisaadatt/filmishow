@@ -16,7 +16,6 @@ const SignupForm = () => {
     { fullName, username, email, password, passwordConfirmation },
     actions
   ) => {
-    console.log(fullName, username, email, password, passwordConfirmation);
     try {
       const response = await signupUser(
         fullName,

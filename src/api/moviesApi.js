@@ -4,25 +4,19 @@ const moviesApi = axios.create({
   baseURL: 'http://localhost:8000',
 });
 
-const getMovies = async () => {
+const getAllMovies = async () => {
   const { data } = await moviesApi.get('/home/');
   return data;
 };
 
+const getArrivalMovies = async () => {
+  const { data } = await moviesApi.get('/arrival/');
+  return data;
+};
+
 const getMovie = async id => {
-  return;
+  const { data } = await moviesApi.get(`/film/${id}/`);
+  return data;
 };
 
-const addMovie = async () => {
-  return;
-};
-
-const editMovie = async id => {
-  return;
-};
-
-const deleteMovie = async id => {
-  return;
-};
-
-export { getMovies, getMovie, addMovie, editMovie, deleteMovie };
+export { getAllMovies, getArrivalMovies, getMovie };
