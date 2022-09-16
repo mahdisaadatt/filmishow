@@ -21,27 +21,27 @@ const MoviePost = () => {
     return <Loader />;
   }
   if (isError) {
-    return <p>{error}</p>;
+    return <p>{error.message}</p>;
   }
 
   const movies = data.map(movie => {
     const genres = movie.genres.map(({ name, title }, id) => {
       return (
-        <Link to={`/genre/${name}`} key={id}>
+        <Link to={`/genre/${name}/`} key={id}>
           <Infos title={title} />
         </Link>
       );
     });
     const countries = movie.countries.map(({ name, title }, id) => {
       return (
-        <Link to={`/country/${name}`} key={id}>
+        <Link to={`/country/${name}/`} key={id}>
           <Infos title={title} />
         </Link>
       );
     });
     const languages = movie.language.map(({ name, title }, id) => {
       return (
-        <Link to={`/genre/${name}`} key={id}>
+        <Link to={`/language/${name}/`} key={id}>
           <Infos title={title} />
         </Link>
       );
@@ -72,7 +72,7 @@ const MoviePost = () => {
       >
         <div className="flex w-full h-full sm:flex-row flex-col">
           <div className="overflow-hidden rounded-lg sm:w-72 sm:h-96 w-full h-80">
-            <Link to={`/movie/${movie.id}/`}>
+            <Link to={`/${movie.group.toLowerCase()}/${movie.id}/`}>
               <img
                 src={movie.photo}
                 alt={movie.name}
@@ -81,7 +81,7 @@ const MoviePost = () => {
             </Link>
           </div>
           <div className="sm:pr-6 sm:pt-0 pt-6 flex-1">
-            <Link to={`/movie/${movie.id}/`}>
+            <Link to={`/${movie.group.toLowerCase()}/${movie.id}/`}>
               <h1 className="text-xl font-yekan-bold">
                 {`${groupName} ${movie.eName} ${movie.pName}`}
               </h1>
@@ -147,7 +147,7 @@ const MoviePost = () => {
         </div>
         <div className="w-full h-full">
           <div className="sm:w-32 w-full sm:h-12 h-10 mr-auto lg:mt-6 mt-4">
-            <Link to={`/movie/${movie.id}/`}>
+            <Link to={`/${movie.group.toLowerCase()}/${movie.id}/`}>
               <Default title={groupName} size="w-full h-full" icon="download" />
             </Link>
           </div>

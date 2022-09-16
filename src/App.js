@@ -1,21 +1,24 @@
 import { useEffect, useState, useContext } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Loader from './components/common/Loader';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/layout/Header/Header';
 import Footer from './components/layout/Footer';
 import Landing from './pages/landing/Landing';
 import Genre from './pages/category/Genre';
 import PageNotFound from './pages/404/PageNotFound';
-import MovieDetails from './pages/details/MovieDetails';
-import SeriesDetails from './pages/details/SeriesDetails';
+import Details from './pages/details/Details';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import UserPanel from './pages/panels/user/UserPanel';
 import ForgetPass from './pages/auth/ForgetPass';
 import AuthContext from './contexts/authContext';
+import Loader from './components/common/Loader';
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -35,8 +38,10 @@ function App() {
             <Route exact path="/" element={<Landing />} />
             <Route exact path="*" element={<PageNotFound />} />
             <Route exact path="/search/:q/" element={<Landing />} />
-            <Route exact path="/movie/:id/" element={<MovieDetails />} />
-            <Route exact path="/series/:id/" element={<SeriesDetails />} />
+            <Route exact path="/movie/:id/" element={<Details />} />
+            <Route exact path="/series/:id/" element={<Details />} />
+            <Route exact path="/animation/:id/" element={<Details />} />
+            <Route exact path="/anime/:id/" element={<Details />} />
             <Route exact path="/genre/:name/" element={<Genre />} />
             {!isLoggedIn ? (
               <>

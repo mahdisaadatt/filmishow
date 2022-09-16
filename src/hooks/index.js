@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useQuery, useMutation, QueryCache } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { getAllMovies, getArrivalMovies, getMovie } from '../api/moviesApi';
 
 export const useAllMovies = () => {
@@ -7,7 +7,7 @@ export const useAllMovies = () => {
 };
 
 export const useMovie = id => {
-  return useQuery(['movie', id], getMovie);
+  return useQuery(['movie', id], () => getMovie(id), { enabled: Boolean(id) });
 };
 
 export const useArrivalMovies = () => {
