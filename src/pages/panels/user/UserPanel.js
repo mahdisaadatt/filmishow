@@ -3,7 +3,7 @@ import AuthContext from '../../../contexts/authContext';
 import Loader from '../../../components/common/Loader';
 
 const UserPanel = () => {
-  const { authTokens } = useContext(AuthContext);
+  const { accessToken } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -16,7 +16,7 @@ const UserPanel = () => {
   return (
     <div>
       <h1>داشبورد</h1>
-      <p>User Id : {authTokens.user_id}</p>
+      <p>User Id : {accessToken.user_id}</p>
     </div>
   );
 };

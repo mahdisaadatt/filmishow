@@ -40,14 +40,15 @@ const loginUser = async (username, password) => {
 };
 
 const logoutUser = async () => {
-  const token = JSON.parse(getCookie('auth-tokens'));
+  const access = getCookie('access-token');
+  const refresh = getCookie('refresh-token');
   const data = await usersApi.post(
     '/api/token/logout/',
-    { refresh_token: token.refresh },
+    { refresh_token: refresh },
     {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token.access}`,
+        Authorization: `Bearer ${access}`,
       },
     }
   );
@@ -55,14 +56,15 @@ const logoutUser = async () => {
 };
 
 const newToken = async () => {
-  const token = JSON.parse(getCookie('auth-tokens'));
-  const data = await usersApi.post(
+  const access = getCookie('access-token');
+  const refresh = getCookie('refresh-token');
+  const { data } = await usersApi.post(
     '/api/token/refresh/',
-    { refresh: token.refresh },
+    { refresh: refresh },
     {
       headers: {
-        'Content-Type': 'application/,json',
-        Authorization: `Bearer ${token.access}`
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access}`,
       },
     }
   );

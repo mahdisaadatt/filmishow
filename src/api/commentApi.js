@@ -1,25 +1,19 @@
 import axios from 'axios';
+import { getCookie } from '../utils/js';
 
-const endpoint = '';
+const commentsApi = axios.create({
+  baseURL: 'http://localhost:8000',
+});
 
-const getComments = async () => {
-  return;
+const addComment = async (id, comment) => {
+  const access = getCookie('access-token');
+  const { data } = await commentsApi.get(`/comment/${id}/?text=${comment}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${access}`,
+    },
+  });
+  return data;
 };
 
-const getComment = async id => {
-  return;
-};
-
-const addComment = async () => {
-  return;
-};
-
-const editComment = async id => {
-  return;
-};
-
-const deleteComment = async id => {
-  return;
-};
-
-export { getComments, getComment, addComment, editComment, deleteComment }
+export { addComment };

@@ -27,16 +27,16 @@ const Details = () => {
         hidden
         bg-no-repeat"
         style={{
-          backgroundImage: `url(${movie.photo})`,
+          backgroundImage: `url(${movie.poster})`,
           backgroundSize: '100% auto',
-          backgroundPosition: 'center -15rem',
+          backgroundPosition: 'center 0',
         }}
       ></div>
       <div className="relative my-4">
         <MovieDetails movie={movie} />
         <MovieSummary movie={movie} />
         <DownloadBadge movie={movie} />
-        <MovieComments movie={movie} />
+        <MovieComments comments={movie.comments} movieId={movie.id} />
       </div>
     </section>
   );

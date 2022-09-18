@@ -10,8 +10,10 @@ const Search = ({ breakPoint, size, fieldStyle, borderStyle, setMenuOpen }) => {
     e.preventDefault();
     if (input && q !== input) {
       setMenuOpen(false);
-      setInput('');
       navigate(`/search/${input}/`);
+    }
+    if (!input) {
+      navigate('/');
     }
   };
   return (

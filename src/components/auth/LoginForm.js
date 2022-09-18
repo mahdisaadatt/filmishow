@@ -20,7 +20,8 @@ const LoginForm = () => {
     try {
       const response = await loginUser(username, password);
       setLoggedIn(true);
-      setCookie('auth-tokens', JSON.stringify(response.data), 5);
+      setCookie('access-token', response.data.access, 5);
+      setCookie('refresh-token', response.data.refresh, 5);
       navigate('/panel/user/');
       actions.resetForm();
     } catch (err) {

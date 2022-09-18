@@ -40,7 +40,8 @@ const Popover = () => {
     setPopoverOpen(false);
     setModalOpen(false);
     setLoggedIn(false);
-    removeCookie('auth-tokens', 5);
+    removeCookie('access-token', 5);
+    removeCookie('refresh-token', 5);
     navigate('/');
   };
   return (

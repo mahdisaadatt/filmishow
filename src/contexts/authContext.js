@@ -2,20 +2,19 @@ import { createContext, useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import { getCookie } from '../utils/js';
 
-const Context = createContext({});
+const Context = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const loginToken = JSON.parse(getCookie('auth-tokens'));
-  const [authTokens, setAuthTokens] = useState(
-    loginToken !== undefined ? loginToken : {}
+  const accessTokenCookie = getCookie('access-token');
+  const [accessToken, setAccessToken] = useState(
+    accessTokenCookie !== undefined ? accessTokenCookie : ''
   );
-  const [isLoggedIn, setLoggedIn] = useState(loginToken ? true : false);
+  const [isLoggedIn, setLoggedIn] = useState(accessTokenCookie ? true : false);
 
   useEffect(() => {
     try {
-      if (loginToken) {
-        const decodedToken = jwt_decode(loginToken.access);
-        setAuthTokens(decodedToken);
+      if (accessTokenCookie) {
+        setAccessToken(jwt_decode(accessTokenCookie));
       }
     } catch (err) {
       console.log(err);
@@ -24,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <Context.Provider
-      value={{ authTokens, setAuthTokens, isLoggedIn, setLoggedIn }}
+      value={{ accessToken, setAccessToken, isLoggedIn, setLoggedIn }}
     >
       {children}
     </Context.Provider>

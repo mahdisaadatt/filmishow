@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { setCookie } from './utils/js';
 import Header from './components/layout/Header/Header';
 import Footer from './components/layout/Footer';
 import Landing from './pages/landing/Landing';
@@ -11,14 +12,27 @@ import Signup from './pages/auth/Signup';
 import UserPanel from './pages/panels/user/UserPanel';
 import ForgetPass from './pages/auth/ForgetPass';
 import AuthContext from './contexts/authContext';
+import { newToken } from './api/usersApi';
 import Loader from './components/common/Loader';
+import GoUp from './components/common/Buttons/GoUp';
 
 function App() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, accessToken } = useContext(AuthContext);
   const location = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+  useEffect(() => {
+    let intervalId;
+    if (isLoggedIn) {
+      intervalId = setInterval(async () => {
+        const data = await newToken();
+        setCookie('access-token', data.access, 5);
+      }, 120000);
+    }
+    return () => clearInterval(intervalId);
+  });
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -32,6 +46,7 @@ function App() {
   return (
     <div className="w-full min-h-screen flex flex-col relative dark:bg-slate-800 text-black dark:text-white bg-slate-50 font-fanum transition">
       <Header />
+      {/* <GoUp /> */}
       <div className="mx-0 p-2">
         <div className="w-full h-full max-w-screen-xl mx-auto">
           <Routes>

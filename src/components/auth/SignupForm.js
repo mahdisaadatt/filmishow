@@ -27,7 +27,8 @@ const SignupForm = () => {
       try {
         const loginResponse = await loginUser(username, password);
         setLoggedIn(true);
-        setCookie('auth-tokens', JSON.stringify(loginResponse.data), 5);
+        setCookie('access-token', loginResponse.data.access, 5);
+        setCookie('refresh-token', loginResponse.data.refresh, 5);
       } catch (err) {
         if (!err?.loginResponse) {
           setErrMsg('اتصال خود را بررسی کنید.');

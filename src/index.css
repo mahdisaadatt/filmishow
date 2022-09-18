@@ -46,6 +46,9 @@
   body {
     direction: rtl;
   }
+  html:focus-within {
+    scroll-behavior: smooth !important;
+  }
 }
 
 @layer components {

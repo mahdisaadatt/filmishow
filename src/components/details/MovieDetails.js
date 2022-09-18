@@ -27,9 +27,18 @@ const MovieDetails = ({ movie }) => {
             className="rounded-lg object-center w-full h-96"
           />
         </Link>
-        <span className="w-32 h-12 items-center justify-center rounded-lg border-2 lg:hidden md:flex hidden border-yellow-300 dark:border-yellow-500">
-          زیرنویس چسبیده
-        </span>
+        <div className="flex justify-center gap-2">
+          {movie.double && (
+            <span className="w-32 h-12 items-center justify-center rounded-lg border-2 lg:hidden md:flex hidden border-blue-500">
+              دوبله فارسی
+            </span>
+          )}
+          {movie.subtitle && (
+            <span className="w-32 h-12 items-center justify-center rounded-lg border-2 lg:hidden md:flex hidden border-yellow-300 dark:border-yellow-500">
+              زیرنویس چسبیده
+            </span>
+          )}
+        </div>
       </div>
       <div className="w-full h-full lg:mr-4 mt-4 lg:mt-0 flex flex-col flex-1">
         <div>
@@ -75,9 +84,18 @@ const MovieDetails = ({ movie }) => {
               <span className="px-2 text-gray-400">|</span>
               <li>{movie.time} دقیقه</li>
             </ul>
-            <span className="p-2 rounded-lg border-2 md:hidden lg:block block border-yellow-300 dark:border-yellow-500">
-              زیرنویس چسبیده
-            </span>
+            <div className="flex items-center justify-center gap-2 flex-wrap">
+              {movie.double && (
+                <span className="p-2 rounded-lg border-2 md:hidden lg:block block border-blue-500">
+                  دوبله فارسی
+                </span>
+              )}
+              {movie.subtitle && (
+                <span className="p-2 rounded-lg border-2 md:hidden lg:block block border-yellow-300 dark:border-yellow-500">
+                  زیرنویس چسبیده
+                </span>
+              )}
+            </div>
           </div>
         </div>
         <div className="py-4 my-4 border-b border-t border-gray-400">
@@ -94,13 +112,13 @@ const MovieDetails = ({ movie }) => {
           </div>
           <div className="flex flex-col justify-center py-2">
             <p>
-              <span className="dark:text-gray-300 text-gray-500">
+              <span className="dark:text-gray-300 text-gray-600">
                 بازیگران :{' '}
               </span>
               {movie.actors}
             </p>
             <p>
-              <span className="dark:text-gray-300 text-gray-500">
+              <span className="dark:text-gray-300 text-gray-600">
                 کارگردان :{' '}
               </span>
               {movie.directors}
@@ -108,7 +126,7 @@ const MovieDetails = ({ movie }) => {
           </div>
         </div>
         <div className="flex gap-2 flex-wrap">
-          <InteractionButton />
+          <InteractionButton like={movie.like} disLike={movie.dislike} />
         </div>
       </div>
     </div>
