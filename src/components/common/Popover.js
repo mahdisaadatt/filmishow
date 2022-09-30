@@ -6,7 +6,7 @@ import {
   RectangleGroupIcon,
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import Action from './Modals/Action';
+import Modal from './Modal';
 import { useGlobalState } from '../../store';
 import { removeCookie } from '../../utils/js';
 import { useNavigate } from 'react-router-dom';
@@ -46,10 +46,10 @@ const Popover = () => {
   };
   return (
     <>
-      <Action
+      <Modal
         action="خروج"
         message="آیا مطمعن هستید که میخواهید خارج شوید؟!"
-        onSignOutClick={signOutAction}
+        onClick={signOutAction}
       />
       <div className="flex flex-col text-black">
         <div

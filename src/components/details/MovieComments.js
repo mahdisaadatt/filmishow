@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import InteractionButton from './InteractionButton';
 import AuthContext from '../../contexts/authContext';
 import Default from '../../components/common/Buttons/Default';
 import Neural from '../../components/common/Buttons/Neural';
 import { addComment } from '../../api/commentApi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import CommentInteraction from './CommentInteraction';
 import Loader from '../../components/common/Loader';
 import { Link } from 'react-router-dom';
 import {
@@ -34,39 +34,46 @@ const MovieComments = ({ comments, movieId }) => {
     }
   };
 
-  const commentList = comments.map(({ id, text, date, commenter }) => {
-    const dateFormat = new Date(date);
+  const commentList = comments.map(
+    ({ id, text, date, commenter, like, dislike }) => {
+      const dateFormat = new Date(date);
 
-    const year = dateFormat.getFullYear();
-    const month = (dateFormat.getMonth() + 1).toString().padStart(2, '0');
-    const day = dateFormat.getDate().toString().padStart(2, '0');
+      const year = dateFormat.getFullYear();
+      const month = (dateFormat.getMonth() + 1).toString().padStart(2, '0');
+      const day = dateFormat.getDate().toString().padStart(2, '0');
 
-    const hour = dateFormat.getHours();
-    const minute = dateFormat.getMinutes().toString().padStart(2, '0');
+      const hour = dateFormat.getHours();
+      const minute = dateFormat.getMinutes().toString().padStart(2, '0');
 
-    return (
-      <div
-        key={id}
-        className="flex justify-between dark:bg-slate-700 bg-slate-300 rounded-lg p-4 flex-wrap gap-2 w-full"
-      >
-        <div className="flex items-center justify-between w-full gap-2 flex-wrap">
-          <div className="flex items-center gap-2">
-            <UserCircleIcon className="w-14" />
-            <div>
-              <h2>{commenter.full_name}</h2>
-              <small className="dark:text-gray-300 text-gray-600">
-                {year}-{month}-{day} {hour}:{minute}
-              </small>
+      return (
+        <div
+          key={id}
+          className="flex justify-between dark:bg-slate-700 bg-slate-300 rounded-lg p-4 flex-wrap gap-2 w-full"
+        >
+          <div className="flex items-center justify-between w-full gap-2 flex-wrap">
+            <div className="flex items-center gap-2">
+              <UserCircleIcon className="w-14" />
+              <div>
+                <h2>{commenter.full_name}</h2>
+                <small className="dark:text-gray-300 text-gray-600">
+                  {year}-{month}-{day} {hour}:{minute}
+                </small>
+              </div>
+            </div>
+            <div className="flex gap-2 flex-wrap">
+              <CommentInteraction
+                size="w-20 h-10"
+                commentId={id}
+                like={like}
+                disLike={dislike}
+              />
             </div>
           </div>
-          <div className="flex gap-2 flex-wrap">
-            <InteractionButton size="w-20 h-10" />
-          </div>
+          <p className="my-1 sm:mx-8 mx-2">{text}</p>
         </div>
-        <p className="my-1 sm:mx-8 mx-2">{text}</p>
-      </div>
-    );
-  });
+      );
+    }
+  );
   return (
     <div className="my-8 dark:bg-slate-900 bg-slate-200 rounded-lg p-4">
       {isLoading && <Loader />}
@@ -94,7 +101,7 @@ const MovieComments = ({ comments, movieId }) => {
             ></textarea>
             <p className="text-red-500">{errMsg}</p>
             <Default
-              size='w-full h-12 sm:w-32'
+              size="w-full h-12 sm:w-32"
               title="ثبت دیدگاه"
               type="submit"
               textColor="dark:text-yellow-400 text-yellow-500 hover:text-black dark:hover:text-black"

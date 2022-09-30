@@ -68,7 +68,7 @@ const MoviePost = () => {
     return (
       <div
         key={movie.id}
-        className="w-full text-white h-auto p-8 flex flex-col bg-gray-500 dark:bg-slate-700 rounded-lg mt-4"
+        className="w-full h-auto p-8 flex flex-col dark:bg-slate-700 bg-slate-200 rounded-lg mt-4"
       >
         <div className="flex w-full h-full sm:flex-row flex-col">
           <div className="overflow-hidden rounded-lg sm:w-72 sm:h-96 w-full h-80">
@@ -90,7 +90,7 @@ const MoviePost = () => {
               <li className="flex gap-x-2">
                 <img src={imdbLogo} alt="IMDB" className="w-10" />
                 <p className="text-lg mt-2">
-                  <span className="text-yellow-400">{movie.score}</span>
+                  <span className="dark:text-yellow-400 text-yellow-600">{movie.score}</span>
                   <small className="mr-2">
                     از 10 میانگین{' '}
                     {movie.average_people &&
@@ -137,18 +137,24 @@ const MoviePost = () => {
                 <p>{movie.time} دقیقه</p>
               </li>
             </ul>
-            <div className="bg-gray-600 dark:bg-slate-800 w-full py-2 px-4 rounded-lg lg:block hidden">
+            <div className="dark:bg-slate-800 bg-slate-300 w-full py-2 px-4 rounded-lg lg:block hidden">
               <p>{movie.summary}</p>
             </div>
           </div>
         </div>
-        <div className="bg-gray-600 dark:bg-slate-800 w-full py-2 px-4 sm:my-8 rounded-lg lg:hidden block">
+        <div className="dark:bg-slate-800 bg-slate-300 w-full py-2 px-4 sm:my-8 rounded-lg lg:hidden block">
           <p>{movie.summary}</p>
         </div>
         <div className="w-full h-full">
           <div className="sm:w-32 w-full sm:h-12 h-10 mr-auto lg:mt-6 mt-4">
             <Link to={`/${movie.group.toLowerCase()}/${movie.id}/`}>
-              <Default title={groupName} size="w-full h-full" icon="download" />
+              <Default
+                title={groupName}
+                size="w-full h-full"
+                icon="download"
+                textColor="dark:text-yellow-400 text-yellow-500 hover:text-black dark:hover:text-black"
+                btnStyle="dark:border-yellow-400 border-yellow-500 dark:hover:bg-yellow-400 hover:bg-yellow-500 hover:bg-yellow-400 dark:focus:ring-yellow-600 focus:ring-yellow-700"
+              />
             </Link>
           </div>
         </div>

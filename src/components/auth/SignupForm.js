@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import Field from '../common/Field/Default';
 import DefaultBtn from '../common/Buttons/Default';
 import { yupSignupSchema } from '../../schemas';
-import { signupUser, loginUser } from '../../api/usersApi';
+import { signupUser, getCode } from '../../api/usersApi';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../contexts/authContext';
 import { setCookie } from '../../utils/js';
@@ -17,35 +17,13 @@ const SignupForm = () => {
     actions
   ) => {
     try {
-      const response = await signupUser(
-        fullName,
-        username,
-        email,
-        password,
-        passwordConfirmation
-      );
-      try {
-        const loginResponse = await loginUser(username, password);
-        setLoggedIn(true);
-        setCookie('access-token', loginResponse.data.access, 5);
-        setCookie('refresh-token', loginResponse.data.refresh, 5);
-      } catch (err) {
-        if (!err?.loginResponse) {
-          setErrMsg('اتصال خود را بررسی کنید.');
-        } else {
-          setErrMsg('وارد نشدید!');
-        }
-      }
-      navigate('/panel/user/');
+      const res = await getCode(email);
+      navigate('/verify-email/', {
+        state: { fullName, username, email, password, passwordConfirmation },
+      });
       actions.resetForm();
     } catch (err) {
-      if (!err?.log) {
-        setErrMsg('لطفا اتصال خود را بررسی کنید');
-      } else if (err.response?.status === 409) {
-        setErrMsg('این نام کاربری قبلا برداشته شده!');
-      } else {
-        setErrMsg('ثبت نام موفقیت آمیز نبود.');
-      }
+      console.log(err.message);
     }
   };
   return (
@@ -60,7 +38,7 @@ const SignupForm = () => {
       validationSchema={yupSignupSchema}
       onSubmit={onSubmit}
     >
-      <Form className="flex flex-col justify-center w-96 h-full py-8">
+      <Form className="flex flex-col justify-center w-96 h-full px-6 py-10 gap-3 dark:bg-slate-700 bg-slate-200 rounded-lg my-10">
         <h1 className="font-yekan-bold text-xl">ثبت نام کنید</h1>
         <div className="flex flex-col my-4">
           {errMsg ? (

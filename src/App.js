@@ -9,6 +9,7 @@ import PageNotFound from './pages/404/PageNotFound';
 import Details from './pages/details/Details';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
+import VerifyEmail from './pages/auth/VerifyEmail';
 import UserPanel from './pages/panels/user/UserPanel';
 import ForgetPass from './pages/auth/ForgetPass';
 import AuthContext from './contexts/authContext';
@@ -17,32 +18,34 @@ import Loader from './components/common/Loader';
 import GoUp from './components/common/Buttons/GoUp';
 
 function App() {
-  const { isLoggedIn, accessToken } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+  // useEffect(() => {
+  //   let intervalId;
+  //   if (isLoggedIn) {
+  //     intervalId = setInterval(async () => {
+  //       const data = await newToken();
+  //       setCookie('access-token', data.access, 5);
+  //     }, 120000);
+  //   }
+  //   return () => clearInterval(intervalId);
+  // });
+
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    let intervalId;
-    if (isLoggedIn) {
-      intervalId = setInterval(async () => {
-        const data = await newToken();
-        setCookie('access-token', data.access, 5);
-      }, 120000);
-    }
-    return () => clearInterval(intervalId);
-  });
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+    window.addEventListener('load', () => setLoading(false));
+    return () => window.removeEventListener('load', () => setLoading(false));
   }, []);
+
   if (loading) {
     return <Loader />;
   }
+
   return (
     <div className="w-full min-h-screen flex flex-col relative dark:bg-slate-800 text-black dark:text-white bg-slate-50 font-fanum transition">
       <Header />
@@ -62,6 +65,7 @@ function App() {
               <>
                 <Route exact path="/login/" element={<Login />} />
                 <Route exact path="/signup/" element={<Signup />} />
+                <Route exact path="/verify-email/" element={<VerifyEmail />} />
                 <Route
                   exact
                   path="/forget-password/"

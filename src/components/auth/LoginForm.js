@@ -43,9 +43,9 @@ const LoginForm = () => {
       validationSchema={yupLoginSchema}
       onSubmit={onSubmit}
     >
-      <Form className="flex flex-col justify-center w-96 h-full py-8">
+      <Form className="flex flex-col justify-center w-96 h-full px-6 py-10 gap-6 dark:bg-slate-700 bg-slate-200 rounded-lg my-10">
         <h1 className="font-yekan-bold text-xl">ورود به حساب کاربری</h1>
-        <div className="flex flex-col my-4">
+        <div className="my-4 w-auto">
           {errMsg ? (
             <p className="text-red-600 py-2 text-lg font-yekan-bold">
               {errMsg}
@@ -66,8 +66,8 @@ const LoginForm = () => {
               type="submit"
               title="ورود"
               size="w-full h-full"
-              btnStyle="border-blue-600 hover:bg-blue-600"
-              textColor="text-blue-600 hover:text-white"
+              btnStyle="border-blue-600 hover:bg-blue-500 bg-blue-600"
+              textColor="text-white hover:text-white"
             />
           </div>
           <div className="w-1/2 sm:w-20">
@@ -76,8 +76,8 @@ const LoginForm = () => {
                 type="button"
                 title="ثبت نام"
                 size="w-full h-full"
-                btnStyle="border-blue-600 hover:bg-blue-500 bg-blue-600"
-                textColor="text-white hover:text-white"
+                btnStyle="border-blue-600 hover:bg-blue-600"
+                textColor="text-blue-600 hover:text-white"
               />
             </Link>
           </div>

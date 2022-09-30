@@ -71,4 +71,26 @@ const newToken = async () => {
   return data;
 };
 
-export { loginUser, signupUser, logoutUser, newToken };
+const getCode = async email => {
+  const data = await usersApi.post(
+    '/email/',
+    { email },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  return data;
+};
+
+const sendCode = async (email, code) => {
+  const data = await usersApi.post(
+    '/email/validation/',
+    { email, code },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  return data;
+};
+
+export { loginUser, signupUser, logoutUser, newToken, getCode, sendCode };

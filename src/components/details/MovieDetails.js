@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import imdbImg from '../../assets/icons/IMDB_Logo.svg';
-import InteractionButton from './InteractionButton';
+import InteractionButtons from './InteractionButtons';
 
 const MovieDetails = ({ movie }) => {
   let groupName;
@@ -14,6 +14,7 @@ const MovieDetails = ({ movie }) => {
   } else {
     groupName = 'دانلود انیمه';
   }
+
   return (
     <div className="w-full h-auto flex lg:flex-row flex-col">
       <div className="flex md:flex-row flex-col justify-between overflow-hidden">
@@ -126,7 +127,12 @@ const MovieDetails = ({ movie }) => {
           </div>
         </div>
         <div className="flex gap-2 flex-wrap">
-          <InteractionButton like={movie.like} disLike={movie.dislike} />
+          <InteractionButtons
+            likeCount={movie.like}
+            disLikeCount={movie.dislike}
+            likeHandler={() => null}
+            disLikeHandler={() => null}
+          />
         </div>
       </div>
     </div>

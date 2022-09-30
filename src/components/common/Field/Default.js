@@ -5,7 +5,7 @@ const Default = ({ ...props }) => {
   const [field, meta] = useField(props);
   const [input, setInput] = useState('');
   return (
-    <div className="form-floating mb-3 sm:w-96">
+    <div className="form-floating mb-3">
       <input
         value={input}
         onChange={e => setInput(e.target.value)}

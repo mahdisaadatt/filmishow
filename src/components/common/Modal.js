@@ -1,9 +1,9 @@
 import { Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclaimationCircleIcon } from '@heroicons/react/24/outline';
-import { useGlobalState } from '../../../store';
+import { useGlobalState } from '../../store';
 
-const Action = ({ action, message, onSignOutClick }) => {
+const Modal = ({ action, message, onClick }) => {
   const { isModalOpen, setModalOpen } = useGlobalState();
   const cancelButtonRef = useRef(null);
 
@@ -14,7 +14,7 @@ const Action = ({ action, message, onSignOutClick }) => {
   const handleAction = () => {
     closeModal();
     setTimeout(() => {
-      return onSignOutClick();
+      return onClick();
     }, 500);
   };
 
@@ -97,4 +97,4 @@ const Action = ({ action, message, onSignOutClick }) => {
   );
 };
 
-export default Action;
+export default Modal;
