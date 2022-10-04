@@ -23,13 +23,12 @@ const Details = () => {
         blur-xl
         opacity-40
         h-4/6
-        md:block
-        hidden
+        sm:bg-[center_0]
+        bg-[center_10rem]
         bg-no-repeat"
         style={{
           backgroundImage: `url(${movie.poster})`,
-          backgroundSize: '100% auto',
-          backgroundPosition: 'center 0',
+          backgroundSize: '100% auto'
         }}
       ></div>
       <div className="relative my-4">

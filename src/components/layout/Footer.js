@@ -2,11 +2,11 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="clear-both mt-auto bg-gray-500 dark:bg-slate-700 p-8 text-white">
+    <footer className="clear-both mt-auto bg-slate-200 dark:bg-slate-700 p-8">
       <div className="max-w-screen-xl mx-auto">
         <h1>
           طراحی با &#10084;&#65039; توسط
-          <a href="mailto:dev.mahdisaadat@gmail.com" className='mr-2 text-yellow-400 font-semibold hover:opacity-80 transition-all'>Mehtiix</a>
+          <a href="mailto:dev.mahdisaadat@gmail.com" className='mr-2 text-yellow-500 font-semibold dark:hover:opacity-80 hover:text-yellow-300 transition-all'>Mehtiix</a>
         </h1>
       </div>
     </footer>

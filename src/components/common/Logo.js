@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/images/logo.svg';
+import logo from '../../assets/images/logo-dark.svg';
 
 const Logo = () => {
   return (
-    <Link to="/">
-      <img
-        src={logo}
+    <Link to="/" className="w-32 h-20">
+      <div
         alt="FilmiShow Logo"
-        className="w-32 cursor-pointer active:scale-95 transition-all"
-      />
+        style={{ backgroundSize: '100%' }}
+        className="w-full h-full bg-center bg-no-repeat active:scale-95 transition-all dark:bg-logo-dark bg-logo-light"
+      ></div>
     </Link>
   );
 };

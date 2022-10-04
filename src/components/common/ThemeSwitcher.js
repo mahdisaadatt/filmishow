@@ -8,7 +8,7 @@ const ThemeSwitcher = () => {
     <DarkModeSwitch
       checked={isDarkMode}
       onChange={toggleDarkMode}
-      sunColor="#FFD600"
+      sunColor="#FFA600"
       size={30}
     />
   );

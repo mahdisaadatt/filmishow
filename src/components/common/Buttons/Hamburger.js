@@ -15,8 +15,16 @@ const Hamburger = ({ isMenuOpen, setMenuOpen }) => {
     };
   }, []);
   return (
-    <button className="w-5 h-10" ref={ref} onClick={() => setMenuOpen(!isMenuOpen)}>
-      <span className={`burger ${isMenuOpen ? 'active-burger' : ''}`}></span>
+    <button
+      className="w-5 h-10"
+      ref={ref}
+      onClick={() => setMenuOpen(!isMenuOpen)}
+    >
+      <span
+        className={`burger dark:before:bg-white before:bg-black dark:after:bg-white after:bg-black ${
+          isMenuOpen ? 'active-burger' : ''
+        }`}
+      ></span>
     </button>
   );
 };

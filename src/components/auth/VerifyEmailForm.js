@@ -3,7 +3,6 @@ import { sendCode, loginUser, signupUser } from '../../api/usersApi';
 import AuthContext from '../../contexts/authContext';
 import { setCookie } from '../../utils/js';
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import DefaultButton from '../common/Buttons/Default';
 
 const VerifyEmailForm = () => {
@@ -58,6 +57,9 @@ const VerifyEmailForm = () => {
       onSubmit={onSubmit}
     >
       <h1>کد تایید را که برایتان ایمیل شد وارد کنید.</h1>
+      {errMsg ? (
+        <p className="text-red-600 text-lg font-yekan-bold">{errMsg}</p>
+      ) : null}
       <input
         placeholder="کد تایید..."
         value={value}
@@ -78,7 +80,6 @@ const VerifyEmailForm = () => {
         m-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 dark:focus:border-blue focus:outline-none`}
       />
-      <p>{errMsg}</p>
       <div className="sm:flex justify-end w-full">
         <DefaultButton
           type="submit"

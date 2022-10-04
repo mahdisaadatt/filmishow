@@ -53,7 +53,7 @@ const Popover = () => {
       />
       <div className="flex flex-col text-black">
         <div
-          className="flex justify-around items-center group w-20 h-12 bg-yellow-400 rounded-lg cursor-pointer"
+          className="flex justify-around items-center group w-20 h-12 dark:bg-yellow-400 bg-yellow-500 rounded-lg cursor-pointer"
           onClick={() => setPopoverOpen(!isPopoverOpen)}
           ref={ref}
         >
@@ -65,7 +65,7 @@ const Popover = () => {
           <UserCircleIcon className="w-8" />
         </div>
         <ul
-          className={`bg-yellow-400 p-4 w-40 text-lg absolute top-20 z-50 rounded-lg ${
+          className={`dark:bg-yellow-400 bg-yellow-500 p-4 w-40 text-lg absolute top-20 z-50 rounded-lg ${
             isPopoverOpen
               ? 'opacity-100 translate-y-0 scale-100 visible'
               : 'opacity-0 translate-y-2 scale-105 invisible'
@@ -73,7 +73,7 @@ const Popover = () => {
           onClick={e => e.stopPropagation()}
         >
           <li
-            className="hover:bg-yellow-200 text-center rounded-lg transition-all"
+            className="dark:hover:bg-yellow-200 hover:bg-yellow-300 text-center rounded-lg transition-all"
             onClick={() => setPopoverOpen(false)}
           >
             <Link className="w-full flex items-center" to="/panel/user">
@@ -82,7 +82,7 @@ const Popover = () => {
             </Link>
           </li>
           <li
-            className="hover:bg-yellow-200 transition-all rounded-lg"
+            className="dark:hover:bg-yellow-200 hover:bg-yellow-300 transition-all rounded-lg"
             onClick={onSignOutClick}
           >
             <button className="w-full flex items-center">

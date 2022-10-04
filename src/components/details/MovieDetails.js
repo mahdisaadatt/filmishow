@@ -17,10 +17,10 @@ const MovieDetails = ({ movie }) => {
 
   return (
     <div className="w-full h-auto flex lg:flex-row flex-col">
-      <div className="flex md:flex-row flex-col justify-between overflow-hidden">
+      <div className="flex md:flex-row flex-col justify-between md:items-start items-center overflow-hidden">
         <Link
           to={`/${movie.group.toLowerCase()}/${movie.id}/`}
-          className="md:w-64"
+          className="md:w-64 sm:w-2/4 w-3/5"
         >
           <img
             src={movie.photo}
@@ -43,7 +43,7 @@ const MovieDetails = ({ movie }) => {
       </div>
       <div className="w-full h-full lg:mr-4 mt-4 lg:mt-0 flex flex-col flex-1">
         <div>
-          <h1 className="text-xl font-yekan-bold">
+          <h1 className="text-xl font-yekan-bold my-3">
             {`${groupName} ${movie.eName} ${movie.pName}`}
           </h1>
           <div className="flex justify-between items-center w-full flex-wrap">
@@ -53,6 +53,7 @@ const MovieDetails = ({ movie }) => {
                   <Link
                     className="m-px dark:hover:text-yellow-500 hover:text-yellow-300 transition-all"
                     key={genre.name}
+                    state={{ title: genre.title, categoryName: 'ژانر' }}
                     to={`/genre/${genre.name}/`}
                   >
                     {genre.title + ' '}
@@ -63,6 +64,10 @@ const MovieDetails = ({ movie }) => {
               <li>
                 <Link
                   to={`/release/${movie.yearOfPublication}/`}
+                  state={{
+                    title: movie.yearOfPublication,
+                    categoryName: 'سال انتشار',
+                  }}
                   className="dark:hover:text-yellow-500 hover:text-yellow-300 transition-all"
                 >
                   {movie.yearOfPublication}
@@ -76,7 +81,8 @@ const MovieDetails = ({ movie }) => {
                   <Link
                     className="m-px dark:hover:text-yellow-500 hover:text-yellow-300 transition-all"
                     key={country.name}
-                    to={`/genre/${country.name}/`}
+                    state={{ title: country.title, categoryName: 'محصول' }}
+                    to={`/country/${country.name}/`}
                   >
                     {country.title + ' '}
                   </Link>

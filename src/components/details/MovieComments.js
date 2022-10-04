@@ -42,7 +42,7 @@ const MovieComments = ({ comments, movieId }) => {
       const month = (dateFormat.getMonth() + 1).toString().padStart(2, '0');
       const day = dateFormat.getDate().toString().padStart(2, '0');
 
-      const hour = dateFormat.getHours();
+      const hour = dateFormat.getHours().toString().padStart(2, '0');
       const minute = dateFormat.getMinutes().toString().padStart(2, '0');
 
       return (

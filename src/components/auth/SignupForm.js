@@ -23,7 +23,7 @@ const SignupForm = () => {
       });
       actions.resetForm();
     } catch (err) {
-      console.log(err.message);
+      setErrMsg('لطفا اتصالات خود را بررسی کنید!');
     }
   };
   return (

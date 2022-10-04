@@ -28,11 +28,11 @@ const Hero = () => {
             <img
               src={movie.photo}
               alt={movie.eName}
-              className="dark:group-hover:opacity-10 group-hover:opacity-40 transition rounded-lg carousel-img"
+              className="group-hover:opacity-10 transition rounded-lg carousel-img md:object-cover object-center"
             />
             <div className="absolute top-0 z-20 overflow-hidden opacity-0 w-full transition group-hover:opacity-100 group-hover:translate-y-10 sm:group-hover:translate-y-5 scale-x-125 group-hover:scale-100">
               <div className="flex flex-row-reverse w-full h-full justify-center items-center gap-2">
-                <StarIcon className="w-6 text-yellow-500" />
+                <StarIcon className="w-6 dark:text-yellow-500 text-yellow-600" />
                 <p className="text-xl font-extrabold mt-2">{movie.score}</p>
               </div>
             </div>
@@ -50,9 +50,8 @@ const Hero = () => {
     );
   });
   return (
-    <section className="section-with-carousel w-full mt-5">
+    <section className="section-with-carousel w-full mt-5 dark:bg-slate-700 bg-slate-200 p-4 rounded-lg">
       <Swiper
-        className="my-8"
         pagination={{
           clickable: true,
         }}

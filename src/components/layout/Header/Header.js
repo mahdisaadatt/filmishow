@@ -13,13 +13,18 @@ const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const { isLoggedIn } = useContext(AuthContext);
   return (
-    <nav className="w-full h-20 text-white relative z-50 bg-gray-500 dark:bg-slate-700 backdrop-filter backdrop-blur-md">
+    <nav className="w-full h-20 relative z-50 bg-slate-300 dark:bg-slate-700 backdrop-filter backdrop-blur-md">
       <div className="w-full h-full px-2 max-w-screen-xl mx-auto flex flex-row items-center justify-between">
         <div className="flex justify-center items-center gap-4">
           <Hamburger isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />
           {!isLoggedIn ? (
             <Link to="/login/">
-              <Default title="ورود به پنل" size="w-24 h-12" />
+              <Default
+                btnStyle="dark:border-yellow-400 dark:hover:bg-yellow-400 border-blue-400 hover:bg-blue-400 dark:focus:ring-yellow-400 focus:ring-blue-400"
+                textColor="hover:text-black dark:text-yellow-400 text-blue-400 dark:hover:text-black"
+                title="ورود به پنل"
+                size="w-24 h-12"
+              />
             </Link>
           ) : (
             <Popover />

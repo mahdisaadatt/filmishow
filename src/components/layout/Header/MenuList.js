@@ -26,8 +26,8 @@ const MenuList = ({ isMenuOpen, setMenuOpen }) => {
         <Search
           breakPoint="sm:hidden flex my-6 w-full"
           size="w-9/12"
-          fieldStyle='placeholder:text-black dark:placeholder:text-white'
-          borderStyle='border-black dark:border-white '
+          fieldStyle="placeholder:text-black dark:placeholder:text-white"
+          borderStyle="border-black dark:border-white "
           setMenuOpen={setMenuOpen}
         />
         <ul className="w-full flex flex-col justify-center items-center gap-4 sm:text-2xl text-xl">

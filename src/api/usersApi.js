@@ -82,10 +82,10 @@ const getCode = async email => {
   return data;
 };
 
-const sendCode = async (email, code) => {
+const sendCode = async (email, token) => {
   const data = await usersApi.post(
     '/email/validation/',
-    { email, code },
+    { email, token },
     {
       headers: { 'Content-Type': 'application/json' },
     }

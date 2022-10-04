@@ -18,7 +18,7 @@ const Search = ({ breakPoint, size, fieldStyle, borderStyle, setMenuOpen }) => {
   };
   return (
     <form
-      className={`${breakPoint} justify-between items-center rounded-md ${size} ${borderStyle} border-2`}
+      className={`${breakPoint} justify-between items-center rounded-md dark:border-white border-black ${size} ${borderStyle} border-2`}
       onSubmit={onSubmit}
       onClick={e => e.stopPropagation()}
     >
@@ -38,7 +38,7 @@ const Search = ({ breakPoint, size, fieldStyle, borderStyle, setMenuOpen }) => {
 
 Search.defaultProps = {
   breakPoint: 'flex flex-row',
-  fieldStyle: 'placeholder:text-white',
+  fieldStyle: 'dark:placeholder:text-white placeholder:text-black',
   borderStyle: '',
 };
 

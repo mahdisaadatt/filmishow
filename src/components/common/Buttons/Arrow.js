@@ -4,7 +4,7 @@ const Arrow = () => {
   return (
     <button
       type="button"
-      className="transition animate-bounce text-yellow-400 border border-yellow-400 hover:bg-yellow-400 hover:text-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-yellow-400 dark:text-yellow-400 dark:hover:text-black"
+      className="transition animate-bounce text-yellow-600 border border-yellow-600 hover:bg-yellow-600 dark:hover:bg-yellow-400 hover:text-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-yellow-400 dark:text-yellow-400 dark:hover:text-black"
     >
       <svg
         aria-hidden="true"
