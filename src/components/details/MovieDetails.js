@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import imdbImg from '../../assets/icons/IMDB_Logo.svg';
 import InteractionButtons from './InteractionButtons';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { likeMovie, disLikeMovie, addFavoriteMovie } from '../../api/moviesApi';
+import Default from '../common/Buttons/Default';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../contexts/authContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 const MovieDetails = ({ movie }) => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(() => addFavoriteMovie(movie.id));
+  const { accessToken, isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { mutate: likeClick } = useMutation(likeMovie);
+  const { mutate: disLikeClick } = useMutation(disLikeMovie);
+
+  const likeHandler = () => {
+    likeClick(movie.id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['movie']);
+      },
+    });
+  };
+
+  const disLikeHandler = () => {
+    disLikeClick(movie.id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['movie']);
+      },
+    });
+  };
+
   let groupName;
   if (movie.group === 'Movie') {
     groupName = 'دانلود فیلم';
@@ -15,8 +44,35 @@ const MovieDetails = ({ movie }) => {
     groupName = 'دانلود انیمه';
   }
 
+  const handleFavorite = () => {
+    if (isLoggedIn) {
+      mutate(
+        { userId: accessToken.user_id },
+        {
+          onSuccess: () => queryClient.invalidateQueries(['favorites']),
+        }
+      );
+      toast.success(t => (
+        <span>
+          فیلم به لیست علاقه تان اضافه گردید
+          <button
+            className="p-2 bg-gray-200 rounded-lg m-1 font-yekan-bold"
+            onClick={() => toast.dismiss(t.id)}
+          >
+            بستن
+          </button>
+        </span>
+      ));
+    } else {
+      setTimeout(() => {
+        navigate('/login/');
+      }, 500);
+    }
+  };
+
   return (
     <div className="w-full h-auto flex lg:flex-row flex-col">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex md:flex-row flex-col justify-between md:items-start items-center overflow-hidden">
         <Link
           to={`/${movie.group.toLowerCase()}/${movie.id}/`}
@@ -124,20 +180,28 @@ const MovieDetails = ({ movie }) => {
               </span>
               {movie.actors}
             </p>
-            <p>
+            <p className="mb-2">
               <span className="dark:text-gray-300 text-gray-600">
                 کارگردان :{' '}
               </span>
               {movie.directors}
             </p>
+            <Default
+              onClick={handleFavorite}
+              title="اضافه به لیست علاقه"
+              size="w-48 h-12 p-2"
+              icon="favorite"
+              btnStyle="bg-transparent border dark:border-white dark:hover:bg-white dark:focus:ring-gray-300 border-black hover:bg-black focus:ring-gray-800"
+              textColor="dark:text-white dark:hover:text-black text-black hover:text-white"
+            />
           </div>
         </div>
         <div className="flex gap-2 flex-wrap">
           <InteractionButtons
             likeCount={movie.like}
             disLikeCount={movie.dislike}
-            likeHandler={() => null}
-            disLikeHandler={() => null}
+            likeHandler={likeHandler}
+            disLikeHandler={disLikeHandler}
           />
         </div>
       </div>

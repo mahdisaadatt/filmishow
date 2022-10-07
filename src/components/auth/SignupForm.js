@@ -1,28 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import Field from '../common/Field/Default';
 import DefaultBtn from '../common/Buttons/Default';
 import { yupSignupSchema } from '../../schemas';
-import { signupUser, getCode } from '../../api/usersApi';
+import { getVerifyUserCode } from '../../api/usersApi';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../contexts/authContext';
-import { setCookie } from '../../utils/js';
 
 const SignupForm = () => {
   const [errMsg, setErrMsg] = useState('');
-  const { setLoggedIn } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const onSubmit = async (
     { fullName, username, email, password, passwordConfirmation },
     actions
   ) => {
+    setLoading(true);
+    setDisabled(true);
     try {
-      const res = await getCode(email);
+      const res = await getVerifyUserCode(email);
       navigate('/verify-email/', {
         state: { fullName, username, email, password, passwordConfirmation },
       });
       actions.resetForm();
     } catch (err) {
+      setLoading(false);
+      setDisabled(false);
       setErrMsg('لطفا اتصالات خود را بررسی کنید!');
     }
   };
@@ -40,6 +43,9 @@ const SignupForm = () => {
     >
       <Form className="flex flex-col justify-center w-96 h-full px-6 py-10 gap-3 dark:bg-slate-700 bg-slate-200 rounded-lg my-10">
         <h1 className="font-yekan-bold text-xl">ثبت نام کنید</h1>
+        {loading ? (
+          <p className="text-lg font-yekan-bold">در حال آماده سازی کد ...</p>
+        ) : null}
         <div className="flex flex-col my-4">
           {errMsg ? (
             <p className="text-red-600 py-2 text-lg font-yekan-bold">
@@ -61,7 +67,12 @@ const SignupForm = () => {
             type="submit"
             title="ثبت نام"
             size="sm:w-20 w-full h-12"
-            btnStyle="border-blue-600 hover:bg-blue-500 bg-blue-600"
+            disabled={disabled}
+            btnStyle={`${
+              disabled
+                ? 'bg-gray-600 border-gray-600 hover:bg-gray-500 cursor-not-allowed'
+                : 'border-blue-600 hover:bg-blue-500 bg-blue-600'
+            }`}
             textColor="text-white hover:text-white"
           />
         </div>

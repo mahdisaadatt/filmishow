@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useField } from 'formik';
 
-const Default = ({ ...props }) => {
+const Default = ({ size, ...props }) => {
   const [field, meta] = useField(props);
   const [input, setInput] = useState('');
   return (
-    <div className="form-floating mb-3">
+    <div className="mb-2">
       <input
         value={input}
         onChange={e => setInput(e.target.value)}
@@ -15,7 +15,7 @@ const Default = ({ ...props }) => {
         // required={true}
         className={`form-control
         block
-        w-full
+        ${size}
         px-3
         py-1.5
         text-base
@@ -26,7 +26,6 @@ const Default = ({ ...props }) => {
         rounded
         transition
         ease-in-out
-        m-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 dark:focus:border-blue focus:outline-none
         ${
           meta.error && meta.touched
@@ -39,6 +38,10 @@ const Default = ({ ...props }) => {
       )}
     </div>
   );
+};
+
+Default.defaultProps = {
+  size: 'w-full',
 };
 
 export default Default;

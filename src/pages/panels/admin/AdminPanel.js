@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../../contexts/authContext';
 import Loader from '../../../components/common/Loader';
-import { Link } from 'react-router-dom';
 import Default from '../../../components/common/Buttons/Default';
+import { Link } from 'react-router-dom';
 
-const UserPanel = () => {
+const AdminPanel = () => {
   const { accessToken } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -31,4 +31,4 @@ const UserPanel = () => {
   );
 };
 
-export default UserPanel;
+export default AdminPanel;

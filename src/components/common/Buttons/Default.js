@@ -1,16 +1,31 @@
 import React from 'react';
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { ArrowDownTrayIcon, BookmarkIcon } from '@heroicons/react/24/outline';
 
-const Default = ({ title, size, textColor, btnStyle, icon, type }) => {
+const Default = ({
+  title,
+  size,
+  textColor,
+  btnStyle,
+  icon,
+  type,
+  disabled,
+  onClick,
+}) => {
   return (
     <button
+      onClick={onClick}
+      disabled={disabled}
       type={type}
       className={`${size} ${btnStyle} ${textColor} flex items-center justify-center flex-row-reverse border-2
                     focus:ring-2 focus:outline-none font-semibold
                     rounded-lg text-sm text-center  transition`}
     >
       {title}
-      {icon === 'download' ? <ArrowDownTrayIcon className="w-6 ml-2" /> : null}
+      {icon === 'download' ? (
+        <ArrowDownTrayIcon className="w-6 ml-2" />
+      ) : icon === 'favorite' ? (
+        <BookmarkIcon className="w-6 ml-2" />
+      ) : null}
     </button>
   );
 };

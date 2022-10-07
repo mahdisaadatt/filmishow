@@ -10,15 +10,18 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import UserPanel from './pages/panels/user/UserPanel';
+import AdminPanel from './pages/panels/admin/AdminPanel';
 import ForgetPass from './pages/auth/ForgetPass';
+import ChangePass from './pages/auth/ChangePass';
 import AuthContext from './contexts/authContext';
 import { newToken } from './api/usersApi';
 import Loader from './components/common/Loader';
 import GoUp from './components/common/Buttons/GoUp';
 import Category from './pages/category/Category';
+import Favorite from './pages/favorite/Favorite';
 
 function App() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, accessToken } = useContext(AuthContext);
   const location = useLocation();
 
   useEffect(() => {
@@ -51,17 +54,19 @@ function App() {
             <Route exact path="/animation/:id/" element={<Details />} />
             <Route exact path="/anime/:id/" element={<Details />} />
             <Route exact path="/:category/:value/" element={<Category />} />
+            <Route exact path="/forget-password/" element={<ForgetPass />} />
+            <Route exact path="/change-password/" element={<ChangePass />} />
             {!isLoggedIn ? (
               <>
                 <Route exact path="/login/" element={<Login />} />
                 <Route exact path="/signup/" element={<Signup />} />
                 <Route exact path="/verify-email/" element={<VerifyEmail />} />
-                <Route
-                  exact
-                  path="/forget-password/"
-                  element={<ForgetPass />}
-                />
               </>
+            ) : (
+              <Route exact path="/favorite/" element={<Favorite />} />
+            )}
+            {accessToken?.is_superuser ? (
+              <Route exact path="/panel/admin/" element={<AdminPanel />} />
             ) : (
               <Route exact path="/panel/user/" element={<UserPanel />} />
             )}

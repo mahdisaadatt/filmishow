@@ -71,7 +71,7 @@ const newToken = async () => {
   return data;
 };
 
-const getCode = async email => {
+const getVerifyUserCode = async email => {
   const data = await usersApi.post(
     '/email/',
     { email },
@@ -82,7 +82,7 @@ const getCode = async email => {
   return data;
 };
 
-const sendCode = async (email, token) => {
+const sendVerifyUserCode = async (email, token) => {
   const data = await usersApi.post(
     '/email/validation/',
     { email, token },
@@ -93,4 +93,47 @@ const sendCode = async (email, token) => {
   return data;
 };
 
-export { loginUser, signupUser, logoutUser, newToken, getCode, sendCode };
+const getPassResetCode = async email => {
+  const data = await usersApi.post(
+    '/password_reset/',
+    { email },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  return data;
+};
+
+const validatePassResetCode = async token => {
+  const data = await usersApi.post(
+    '/password_reset/validate_token/',
+    { token },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  return data;
+};
+
+const confirmNewPass = async (password, token) => {
+  const data = await usersApi.post(
+    '/password_reset/confirm/',
+    { password, token },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  return data;
+};
+
+export {
+  loginUser,
+  signupUser,
+  logoutUser,
+  newToken,
+  getVerifyUserCode,
+  sendVerifyUserCode,
+  getPassResetCode,
+  validatePassResetCode,
+  confirmNewPass,
+};

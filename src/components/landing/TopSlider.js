@@ -50,7 +50,7 @@ const Hero = () => {
     );
   });
   return (
-    <section className="section-with-carousel w-full mt-5 dark:bg-slate-700 bg-slate-200 p-4 rounded-lg">
+    <section className="section-with-carousel w-full mt-10 rounded-lg">
       <Swiper
         pagination={{
           clickable: true,

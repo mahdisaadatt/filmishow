@@ -16,7 +16,7 @@ import { logoutUser } from '../../api/usersApi';
 const Popover = () => {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
   const { isModalOpen, setModalOpen } = useGlobalState();
-  const { setLoggedIn } = useContext(AuthContext);
+  const { setLoggedIn, accessToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const ref = useRef();
   useEffect(() => {
@@ -53,7 +53,7 @@ const Popover = () => {
       />
       <div className="flex flex-col text-black">
         <div
-          className="flex justify-around items-center group w-20 h-12 dark:bg-yellow-400 bg-yellow-500 rounded-lg cursor-pointer"
+          className="flex justify-around items-center group w-20 h-12 bg-yellow-400 rounded-lg cursor-pointer"
           onClick={() => setPopoverOpen(!isPopoverOpen)}
           ref={ref}
         >
@@ -65,7 +65,7 @@ const Popover = () => {
           <UserCircleIcon className="w-8" />
         </div>
         <ul
-          className={`dark:bg-yellow-400 bg-yellow-500 p-4 w-40 text-lg absolute top-20 z-50 rounded-lg ${
+          className={`bg-yellow-400 p-4 w-40 text-lg absolute top-20 z-50 rounded-lg ${
             isPopoverOpen
               ? 'opacity-100 translate-y-0 scale-100 visible'
               : 'opacity-0 translate-y-2 scale-105 invisible'
@@ -73,16 +73,19 @@ const Popover = () => {
           onClick={e => e.stopPropagation()}
         >
           <li
-            className="dark:hover:bg-yellow-200 hover:bg-yellow-300 text-center rounded-lg transition-all"
+            className="hover:bg-yellow-200 text-center rounded-lg transition-all"
             onClick={() => setPopoverOpen(false)}
           >
-            <Link className="w-full flex items-center" to="/panel/user">
+            <Link
+              className="w-full flex items-center"
+              to={accessToken?.is_superuser ? '/panel/admin/' : 'panel/user/'}
+            >
               <RectangleGroupIcon className="w-6 m-2" />
               <p>پنل کاربری</p>
             </Link>
           </li>
           <li
-            className="dark:hover:bg-yellow-200 hover:bg-yellow-300 transition-all rounded-lg"
+            className="hover:bg-yellow-200 transition-all rounded-lg"
             onClick={onSignOutClick}
           >
             <button className="w-full flex items-center">

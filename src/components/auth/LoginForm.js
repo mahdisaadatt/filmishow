@@ -8,23 +8,27 @@ import { Link } from 'react-router-dom';
 import { yupLoginSchema } from '../../schemas';
 import AuthContext from '../../contexts/authContext';
 import { loginUser } from '../../api/usersApi';
-import Loader from '../common/Loader';
 import { setCookie } from '../../utils/js';
 
 const LoginForm = () => {
   const { setLoggedIn } = useContext(AuthContext);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
   const onSubmit = async ({ username, password }, actions) => {
+    setLoading(true);
+    setDisabled(true);
     try {
       const response = await loginUser(username, password);
       setLoggedIn(true);
       setCookie('access-token', response.data.access, 5);
       setCookie('refresh-token', response.data.refresh, 5);
-      navigate('/panel/user/');
       actions.resetForm();
+      navigate('/');
     } catch (err) {
+      setLoading(false);
+      setDisabled(false);
       if (!err?.response) {
         setErrMsg('اتصال خود را بررسی کنید.');
       } else if (err.response?.status === 400) {
@@ -45,6 +49,9 @@ const LoginForm = () => {
     >
       <Form className="flex flex-col justify-center w-96 h-full px-6 py-10 gap-6 dark:bg-slate-700 bg-slate-200 rounded-lg my-10">
         <h1 className="font-yekan-bold text-xl">ورود به حساب کاربری</h1>
+        {loading ? (
+          <p className="text-lg font-yekan-bold">در حال انتقال ...</p>
+        ) : null}
         <div className="my-4 w-auto">
           {errMsg ? (
             <p className="text-red-600 py-2 text-lg font-yekan-bold">
@@ -66,7 +73,12 @@ const LoginForm = () => {
               type="submit"
               title="ورود"
               size="w-full h-full"
-              btnStyle="border-blue-600 hover:bg-blue-500 bg-blue-600"
+              disabled={disabled}
+              btnStyle={`${
+                disabled
+                  ? 'bg-gray-600 border-gray-600 hover:bg-gray-500 cursor-not-allowed'
+                  : 'border-blue-600 hover:bg-blue-500 bg-blue-600'
+              }`}
               textColor="text-white hover:text-white"
             />
           </div>
@@ -76,6 +88,7 @@ const LoginForm = () => {
                 type="button"
                 title="ثبت نام"
                 size="w-full h-full"
+                disabled={disabled}
                 btnStyle="border-blue-600 hover:bg-blue-600"
                 textColor="text-blue-600 hover:text-white"
               />

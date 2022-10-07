@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { getAllMovies, getArrivalMovies, getMovie } from '../api/moviesApi';
+import {
+  getAllMovies,
+  getArrivalMovies,
+  getMovie,
+  getFavoriteMovies,
+} from '../api/moviesApi';
 
 export const useAllMovies = () => {
   return useQuery(['movies'], getAllMovies);
@@ -12,6 +17,10 @@ export const useMovie = id => {
 
 export const useArrivalMovies = () => {
   return useQuery(['arrival'], getArrivalMovies);
+};
+
+export const useFavoriteMovies = () => {
+  return useQuery(['favorites'], getFavoriteMovies);
 };
 
 export const useTheme = () => {
