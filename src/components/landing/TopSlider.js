@@ -6,17 +6,8 @@ import Arrow from '../common/Buttons/Arrow';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useArrivalMovies } from '../../hooks';
-import Loader from '../common/Loader';
 
-const Hero = () => {
-  const { isLoading, isError, error, data } = useArrivalMovies();
-  if (isLoading) {
-    return <Loader />;
-  }
-  if (isError) {
-    return <p>{error}</p>;
-  }
+const Hero = ({ data }) => {
   const movies = data.map(({ film: movie }) => {
     return (
       <SwiperSlide key={movie.id} className="px-2">

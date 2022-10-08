@@ -15,10 +15,10 @@ import {
   FolderIcon,
   BookmarkIcon,
 } from '@heroicons/react/24/outline';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const AllMovies = ({ movie }) => {
-  const { mutate } = useMutation(() => addFavoriteMovie(movie.id));
+  const { mutate, status } = useMutation(() => addFavoriteMovie(movie.id));
   const { accessToken, isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -74,15 +74,31 @@ const AllMovies = ({ movie }) => {
       mutate(
         { userId: accessToken.user_id },
         {
-          onSuccess: () => queryClient.invalidateQueries(['favorites']),
+          onSuccess: data => {
+            toast.success(t => (
+              <div className="flex items-center justify-center">
+                {data === '' ? (
+                  <p>
+                    فیلم به لیست علاقه <b className="text-green-600">اضافه</b>{' '}
+                    شد
+                  </p>
+                ) : data === 205 ? (
+                  <p>
+                    فیلم از لیست علاقه <b className="text-red-600">حذف</b> شد
+                  </p>
+                ) : null}
+                <button
+                  className="p-2 bg-gray-200 rounded-lg m-1 font-yekan-bold"
+                  onClick={() => toast.dismiss(t.id)}
+                >
+                  بستن
+                </button>
+              </div>
+            ));
+            queryClient.invalidateQueries(['favorites']);
+          },
         }
       );
-      toast.success(t => (
-        <span>
-          فیلم به لیست علاقه تان اضافه گردید
-          <button className='p-2 bg-gray-200 rounded-lg m-1 font-yekan-bold' onClick={() => toast.dismiss(t.id)}>بستن</button>
-        </span>
-      ));
     } else {
       setTimeout(() => {
         navigate('/login/');
@@ -95,7 +111,6 @@ const AllMovies = ({ movie }) => {
       key={movie.id}
       className="w-full h-auto p-8 flex flex-col dark:bg-slate-700 bg-slate-200 rounded-lg mt-4"
     >
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex w-full h-full sm:flex-row flex-col">
         <div className="overflow-hidden rounded-lg sm:w-72 sm:h-96 w-full h-full">
           <Link to={`/${movie.group.toLowerCase()}/${movie.id}/`}>

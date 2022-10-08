@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { setCookie } from './utils/js';
 import Header from './components/layout/Header/Header';
@@ -19,28 +19,38 @@ import Loader from './components/common/Loader';
 import GoUp from './components/common/Buttons/GoUp';
 import Category from './pages/category/Category';
 import Favorite from './pages/favorite/Favorite';
+import { Toaster } from 'react-hot-toast';
+import LoadingBar from 'react-top-loading-bar';
 
 function App() {
   const { isLoggedIn, accessToken } = useContext(AuthContext);
+  const [progress, setProgress] = useState(0);
+  const ref = useRef();
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // useEffect(() => {
-  //   let intervalId;
-  //   if (isLoggedIn) {
-  //     intervalId = setInterval(async () => {
-  //       const data = await newToken();
-  //       setCookie('access-token', data.access, 5);
-  //     }, 120000);
-  //   }
-  //   return () => clearInterval(intervalId);
-  // });
+  useEffect(() => {
+    ref.current.continuousStart();
+    ref.current.complete();
+    // let intervalId;
+    // if (isLoggedIn) {
+    //   intervalId = setInterval(async () => {
+    //     const data = await newToken();
+    //     setCookie('access-token', data.access, 5);
+    //   }, 120000);
+    // }
+    // return () => clearInterval(intervalId);
+  });
 
   return (
     <div className="w-full min-h-screen flex flex-col relative dark:bg-slate-800 text-black dark:text-white bg-slate-50 font-fanum transition">
+      <div style={{ direction: 'ltr' }}>
+        <LoadingBar color="#1192f0" ref={ref} />
+      </div>
+      <Toaster position="top-center" reverseOrder={false} />
       <Header />
       {/* <GoUp /> */}
       <div className="mx-0 p-2">

@@ -49,20 +49,31 @@ const MovieDetails = ({ movie }) => {
       mutate(
         { userId: accessToken.user_id },
         {
-          onSuccess: () => queryClient.invalidateQueries(['favorites']),
+          onSuccess: data => {
+            toast.success(t => (
+              <div className="flex items-center justify-center">
+                {data === '' ? (
+                  <p>
+                    فیلم به لیست علاقه <b className="text-green-600">اضافه</b>{' '}
+                    شد
+                  </p>
+                ) : data === 205 ? (
+                  <p>
+                    فیلم از لیست علاقه <b className="text-red-600">حذف</b> شد
+                  </p>
+                ) : null}
+                <button
+                  className="p-2 bg-gray-200 rounded-lg m-1 font-yekan-bold"
+                  onClick={() => toast.dismiss(t.id)}
+                >
+                  بستن
+                </button>
+              </div>
+            ));
+            queryClient.invalidateQueries(['favorites']);
+          },
         }
       );
-      toast.success(t => (
-        <span>
-          فیلم به لیست علاقه تان اضافه گردید
-          <button
-            className="p-2 bg-gray-200 rounded-lg m-1 font-yekan-bold"
-            onClick={() => toast.dismiss(t.id)}
-          >
-            بستن
-          </button>
-        </span>
-      ));
     } else {
       setTimeout(() => {
         navigate('/login/');
@@ -72,7 +83,6 @@ const MovieDetails = ({ movie }) => {
 
   return (
     <div className="w-full h-auto flex lg:flex-row flex-col">
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex md:flex-row flex-col justify-between md:items-start items-center overflow-hidden">
         <Link
           to={`/${movie.group.toLowerCase()}/${movie.id}/`}

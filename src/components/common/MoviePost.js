@@ -1,20 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useAllMovies } from '../../hooks';
 import Loader from './Loader';
 import AllMovies from './AllMovies';
 import Pagination from './Pagination';
 
-const MoviePost = () => {
+const MoviePost = ({ data }) => {
   const { q } = useParams();
-  const { isLoading, isError, error, data } = useAllMovies();
-
-  if (isLoading) {
-    return <Loader />;
-  }
-  if (isError) {
-    return <p>{error.message}</p>;
-  }
 
   const movies = data.map(movie => {
     if (q) {
