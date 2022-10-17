@@ -3,6 +3,7 @@ import { useAllMovies, useArrivalMovies } from '../../hooks';
 import TopSlider from '../../components/landing/TopSlider';
 import MoviePost from '../../components/common/MoviePost';
 import Sidebar from '../../components/layout/SideBar/Sidebar';
+import Loader from '../../components/common/Loader';
 
 const Landing = () => {
   const {
@@ -16,7 +17,7 @@ const Landing = () => {
     data: arrivalMovies,
   } = useArrivalMovies();
   if (moviesLoading || arrivalLoading) {
-    return;
+    return <Loader />;
   }
   if (isMoviesError || isArrivalError) {
     return <p>مشکلی به وجود آمده!</p>;

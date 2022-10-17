@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from '../utils/js';
 
 const moviesApi = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://filmishow.herokuapp.com',
 });
 
 const getAllMovies = async () => {
@@ -41,16 +41,6 @@ const addFavoriteMovie = async (filmId, userId) => {
       },
     }
   );
-  return data;
-};
-
-const removeFavoriteMovie = async () => {
-  const access = getCookie('access-token');
-  const { data } = await moviesApi.get(`/favorites/`, {
-    headers: {
-      Authorization: `Bearer ${access}`,
-    },
-  });
   return data;
 };
 

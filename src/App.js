@@ -9,8 +9,7 @@ import Details from './pages/details/Details';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import VerifyEmail from './pages/auth/VerifyEmail';
-import UserPanel from './pages/panels/user/UserPanel';
-import AdminPanel from './pages/panels/admin/AdminPanel';
+import Panels from './pages/panels/Panel';
 import ForgetPass from './pages/auth/ForgetPass';
 import ChangePass from './pages/auth/ChangePass';
 import AuthContext from './contexts/authContext';
@@ -76,9 +75,9 @@ function App() {
               <Route exact path="/favorite/" element={<Favorite />} />
             )}
             {accessToken?.is_superuser ? (
-              <Route exact path="/panel/admin/" element={<AdminPanel />} />
+              <Route exact path="/panel/admin/" element={<Panels />} />
             ) : (
-              <Route exact path="/panel/user/" element={<UserPanel />} />
+              <Route exact path="/panel/user/" element={<Panels />} />
             )}
           </Routes>
         </div>

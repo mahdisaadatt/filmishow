@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from '../utils/js';
 
 const usersApi = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://filmishow.herokuapp.com',
 });
 
 const signupUser = async (
