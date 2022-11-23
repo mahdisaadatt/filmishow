@@ -4,6 +4,14 @@
 
 [Live Demo](https://filmishow.vercel.app/)
 
+### Built with
+
+- [React](https://reactjs.org/)
+- React Query
+- React Router v6
+- Axios
+- Tailwind
+
 ## ** Backend **
 
 Backend of this project written with Django by [@MsnzmT](https://github.com/MsnzmT).
