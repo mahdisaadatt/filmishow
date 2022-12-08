@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from '../utils/js';
 
 const moviesApi = axios.create({
-  baseURL: 'https://filmishow.herokuapp.com',
+  baseURL: 'https://filmishow.iran.liara.run',
 });
 
 const getAllMovies = async () => {
