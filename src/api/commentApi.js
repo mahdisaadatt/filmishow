@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from '../utils/js';
 
 const commentsApi = axios.create({
-  baseURL: 'https://filmishow.iran.liara.run',
+  baseURL: 'https://filmishow.up.railway.app',
 });
 
 const addComment = async (id, comment) => {
